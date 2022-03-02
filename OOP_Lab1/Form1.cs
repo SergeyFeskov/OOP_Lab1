@@ -13,11 +13,9 @@ namespace OOP_Lab1
     public partial class Form1 : Form
     {
         private List<Figure> figures;
-        private const int FigAm = 1;
+        private const int FigAm = 3;
         private Graphics painter;
         private int currFigNum;
-        private int figX;
-        private int figY;
 
         public Form1()
         {
@@ -30,7 +28,9 @@ namespace OOP_Lab1
             currFigNum = FigAm;
             figures = new List<Figure>()
             {
-                new Point()
+                new Point(),
+                new Line(25),
+                new Triangle(100, 150, 125, 130)
             };
         }
 
