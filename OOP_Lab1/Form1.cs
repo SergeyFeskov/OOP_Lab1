@@ -13,7 +13,7 @@ namespace OOP_Lab1
     public partial class Form1 : Form
     {
         private List<Figure> figures;
-        private const int FigAm = 3;
+        private const int FigAm = 4;
         private Graphics painter;
         private int currFigNum;
 
@@ -29,8 +29,9 @@ namespace OOP_Lab1
             figures = new List<Figure>()
             {
                 new Point(),
-                new Line(25),
-                new Triangle(100, 150, 125, 130)
+                new Line(25, (float)(Math.PI / 6)),
+                new Triangle(new Line(40, (float)(Math.PI / 3)), new Line(70, 0)),
+                new RightTriangle(50, 50, (float)(Math.PI / 2))
             };
         }
 
@@ -44,8 +45,8 @@ namespace OOP_Lab1
         {
             if (currFigNum != FigAm)
             {
-                figures[currFigNum].X = e.X;
-                figures[currFigNum].Y = e.Y;
+                PointF ClickCords = new PointF(e.X, e.Y);
+                figures[currFigNum].StartPoint = ClickCords;
                 figures[currFigNum].Draw(painter);
                 currFigNum++;
             }

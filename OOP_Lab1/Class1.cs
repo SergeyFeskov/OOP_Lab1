@@ -21,74 +21,121 @@ namespace OOP_Lab1
         public Color FillColor { get; set; }
         public Color BorderColor { get; set; }   
         public int BorderWidth { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
+        public virtual PointF StartPoint { get; set; }
     }
     public class Point : Figure
     {
         public Point() : base()
         {
         }
-        public Point(int X, int Y) : base()
+        public Point(float X, float Y) : base()
         {
-            this.X = X;
-            this.Y = Y;
+            PointF tmp = StartPoint;
+            tmp.X = X;
+            tmp.Y = Y;
+            StartPoint = tmp;
         }
 
         public override void Draw(Graphics painter) 
         {
             Pen penObj = new Pen(this.BorderColor, this.BorderWidth);
-            painter.DrawLine(penObj, X, Y, X + 2, Y);  
+            painter.DrawLine(penObj, StartPoint.X, StartPoint.Y, StartPoint.X + 2, StartPoint.Y);  
         }
     }
 
     public class Line : Point
     {
-        public Line(int Length) : base()
+        public Line(float Length, float Degree) : base()
         {
+            lenX = (float)(Length * Math.Cos(Degree));
+            lenY = (float)(Length * Math.Sin(Degree));
             this.Length = Length;
+            this.Degree = Degree;
         }
-        public Line(int X, int Y, int Length) : base(X, Y)
+        public Line(float X, float Y, float Length, float Degree) : base(X, Y)
         {
+            lenX = (float)(Length * Math.Cos(Degree));
+            lenY = (float)(Length * Math.Sin(Degree));
             this.Length = Length;
+            this.Degree = Degree;
         }
 
         public override void Draw(Graphics painter)
         {
             Pen penObj = new Pen(this.BorderColor, this.BorderWidth);
-            painter.DrawLine(penObj, X, Y, X + this.Length, Y);
+            painter.DrawLine(penObj, StartPoint.X, StartPoint.Y, StartPoint.X + lenX, StartPoint.Y - lenY);
         }
 
-        public int Length { get; protected set; }
+        public float lenX { get; protected set; }
+        public float lenY { get; protected set; }
+        public float Length { get; protected set; }
+        public float Degree { get; protected set; }
     }
 
     public class Triangle : Figure
     {
-        public Triangle(int X2, int Y2, int X3, int Y3) : base()
+        public Triangle()
         {
-            this.X2 = X2;
-            this.Y2 = Y2;
-            this.X3 = X3;
-            this.Y3 = Y3;
         }
-
-        public override void Draw(Graphics painter)
+        public Triangle(float X2, float Y2, float X3, float Y3) : base()
+        {
+            Point2.X = X2;
+            Point2.Y = Y2;
+            Point3.X = X3;  
+            Point3.Y = Y3;
+        }
+        public Triangle(Line Side1, Line Side2) : base()
+        {
+            Point2.X = StartPoint.X + Side1.lenX;
+            Point2.Y = StartPoint.Y - Side1.lenY;
+            Point3.X = StartPoint.X + Side2.lenX;
+            Point3.Y = StartPoint.Y - Side2.lenY;
+        }
+        public sealed override void Draw(Graphics painter)
         {
             Pen penObj = new Pen(this.BorderColor, this.BorderWidth);
             PointF[] trianglePoints = {
-                new PointF(this.X, this.Y),
-                new PointF(this.X2, this.Y2),
-                new PointF(this.X3, this.Y3)
+                StartPoint,
+                Point2,
+                Point3
             };
             painter.DrawPolygon(penObj, trianglePoints);
             Brush brushObj = new SolidBrush(this.FillColor);
             painter.FillPolygon(brushObj, trianglePoints);
         }
 
-        public int X2 { get; set; }
-        public int Y2 { get; set; }
-        public int X3 { get; set; }
-        public int Y3 { get; set; }
+        public override PointF StartPoint 
+        { 
+            get => base.StartPoint; 
+            set 
+            {
+                Point2.X = value.X + (Point2.X - StartPoint.X);
+                Point2.Y = value.Y + (Point2.Y - StartPoint.Y);
+                Point3.X = value.X + (Point3.X - StartPoint.X);
+                Point3.Y = value.Y + (Point3.Y - StartPoint.Y);
+                base.StartPoint = value;
+            } 
+        }
+        public PointF Point2;
+        public PointF Point3;
+    }
+
+    public class RightTriangle : Triangle
+    {
+        public RightTriangle(Line Side1, Line Side2) : base(Side1, Side2)
+        {
+            Side2 = new Line(Side2.Length, (float)(Side1.Degree - Math.PI / 2));
+            Point3.X = StartPoint.X + Side2.lenX;
+            Point3.Y = StartPoint.Y - Side2.lenY;
+        }
+
+        public RightTriangle(float Leg1, float Leg2, float Degree)
+        {
+            Point2.X = (float)(StartPoint.X + Leg1 * Math.Cos((Math.PI / 2) + Degree));
+            Point2.Y = (float)(StartPoint.Y - Leg1 * Math.Sin((Math.PI / 2) + Degree));
+            Point3.X = (float)(StartPoint.X + Leg2 * Math.Cos(Degree));
+            Point3.Y = (float)(StartPoint.Y - Leg2 * Math.Sin(Degree));
+        }
     }
 }
 
