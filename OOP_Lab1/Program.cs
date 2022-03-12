@@ -6,6 +6,8 @@ using System.Windows.Forms;
 
 namespace OOP_Lab1
 {
+    using System.Drawing;
+    using System.Windows.Forms;
     static class Program
     {
         /// <summary>

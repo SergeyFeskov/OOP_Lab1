@@ -13,7 +13,7 @@ namespace OOP_Lab1
     public partial class Form1 : Form
     {
         private List<Figure> figures;
-        private const int FigAm = 7;
+        private const int FigAm = 8;
         private Graphics painter;
         private int currFigNum;
 
@@ -28,13 +28,14 @@ namespace OOP_Lab1
             currFigNum = FigAm;
             figures = new List<Figure>()
             {
-                new Point(),
-                new Line(25, (float)(Math.PI / 6)),
-                new Triangle(new Line(40, (float)(Math.PI / 3)), new Line(70, 0)),
-                new RectTriangle(50, 50, (float)(Math.PI / 2)),
-                new RightTriangle(new Line(60, 0)),
-                new Quadrangal(new PointF(0, 0), new Line(40, 1), new Line(65, (float)-0.1), new Line(30, -2)),
-                new Ellipse(new PointF(0, 0), 40, 25, 0.6)
+                new Point(new PointF(0,0)),
+                new Line(new PointF(0,0), 25, (float)(Math.PI / 6)),
+                new Triangle(new PointF(0,0), new Vector(40, Math.PI / 3), new Vector(70, 0)),
+                new RectTriangle(new PointF(0,0), new Vector(85, 0.4), 100),
+                new RightTriangle(new PointF(0,0), new Vector(60, Math.PI / 3)),
+                new Quadrangal(new PointF(0,0), new Vector(40, (double)1), new Vector(65, (double)-0.1), new Vector(30, (double)-2)),
+                new Ellipse(new PointF(0,0), 40, 25),
+                new Circle(new PointF(0,0), 55)
             };
         }
 
@@ -42,6 +43,7 @@ namespace OOP_Lab1
         private void button1_Click(object sender, EventArgs e)
         {
             currFigNum = 0;
+            painter.Clear(Color.White);
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -53,6 +55,11 @@ namespace OOP_Lab1
                 figures[currFigNum].Draw(painter);
                 currFigNum++;
             }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
