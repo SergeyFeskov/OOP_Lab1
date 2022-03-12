@@ -10,13 +10,7 @@ namespace OOP_Lab2
     public abstract class Figure
     {
         public Figure()
-        {
-            this.FillColor = Color.LimeGreen;
-            this.BorderColor = Color.Black;
-            this.BorderWidth = 2;
-        }
-
-        public abstract void Draw(Graphics painter);
+        { }
 
         public Color FillColor { get; set; }
         public Color BorderColor { get; set; }

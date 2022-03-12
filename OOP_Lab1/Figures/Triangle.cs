@@ -35,19 +35,6 @@ namespace OOP_Lab2
             Point3 = new PointF(Point1.X + side2.X, Point1.Y - side2.Y);
         }
 
-        public sealed override void Draw(Graphics painter)
-        {
-            Pen penObj = new Pen(this.BorderColor, this.BorderWidth);
-            PointF[] trianglePoints = {
-                Point1,
-                Point2,
-                Point3
-            };
-            painter.DrawPolygon(penObj, trianglePoints);
-            Brush brushObj = new SolidBrush(this.FillColor);
-            painter.FillPolygon(brushObj, trianglePoints);
-        }
-
         public override PointF Point1
         {
             get => base.Point1;

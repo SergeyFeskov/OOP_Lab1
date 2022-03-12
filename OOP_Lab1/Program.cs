@@ -17,8 +17,8 @@ namespace OOP_Lab2
         static void Main()
         {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.SetCompatibleTextRenderingDefault(false);                
+            Application.Run(new Form1());            
         }
     }
 }

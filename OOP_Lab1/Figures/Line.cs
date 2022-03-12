@@ -18,14 +18,8 @@ namespace OOP_Lab2
         public Line(PointF startPoint, float length, float degree) : base()
         {
             Point1 = startPoint;
-            LineVector = new Vector(length, degree);
-        }
-
-        public override void Draw(Graphics painter)
-        {
-            Pen penObj = new Pen(this.BorderColor, this.BorderWidth);
-            painter.DrawLine(penObj, Point1.X, Point1.Y, Point1.X + LineVector.X, Point1.Y - LineVector.Y);
-        }
+            LineVector = new Vector(length, (double)degree);
+        }      
 
         public Vector LineVector { get; set; }
     }

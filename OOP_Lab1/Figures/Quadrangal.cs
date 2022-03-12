@@ -29,21 +29,7 @@ namespace OOP_Lab2
             Point2 = new PointF(Point1.X + vector1.X, Point1.Y - vector1.Y);
             Point3 = new PointF(Point2.X + vector2.X, Point2.Y - vector2.Y);
             Point4 = new PointF(Point3.X + vector3.X, Point3.Y - vector3.Y);
-        }
-
-        public sealed override void Draw(Graphics painter)
-        {
-            Pen penObj = new Pen(this.BorderColor, this.BorderWidth);
-            PointF[] quadrangalPoints = {
-                Point1,
-                Point2,
-                Point3,
-                Point4
-            };
-            painter.DrawPolygon(penObj, quadrangalPoints);
-            Brush brushObj = new SolidBrush(this.FillColor);
-            painter.FillPolygon(brushObj, quadrangalPoints);
-        }
+        }        
 
         public sealed override PointF Point1
         {
