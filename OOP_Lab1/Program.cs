@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OOP_Lab1
+namespace OOP_Lab2
 {
     using System.Drawing;
     using System.Windows.Forms;

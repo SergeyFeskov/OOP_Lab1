@@ -1,4 +1,4 @@
-﻿namespace OOP_Lab1.Properties {
+﻿namespace OOP_Lab2.Properties {
     
     
     // Этот класс позволяет обрабатывать определенные события в классе параметров:

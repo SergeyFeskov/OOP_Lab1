@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace OOP_Lab1
+namespace OOP_Lab2
 {
     partial class Form1
     {

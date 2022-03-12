@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace OOP_Lab1
+namespace OOP_Lab2
 {
     public class Quadrangal : Figure
     {

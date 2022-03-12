@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OOP_Lab1
+namespace OOP_Lab2
 {
     public class Vector
     {
