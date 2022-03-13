@@ -9,6 +9,12 @@ namespace OOP_Lab2
 {
     public class Line : Figure
     {
+        public Line(PointF startPoint, PointF endPoint) : base()
+        {
+            Point1 = startPoint;
+            LineVector = new Vector(endPoint.X - startPoint.X, startPoint.Y - endPoint.Y);
+        }
+
         public Line(PointF startPoint, Vector vector) : base()
         {
             Point1 = startPoint;

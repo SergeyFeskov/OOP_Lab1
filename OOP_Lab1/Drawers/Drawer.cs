@@ -8,7 +8,7 @@ using System.Drawing;
 namespace OOP_Lab2.Drawers
 {
     public abstract class Drawer
-    {
+    { 
         public Drawer(Graphics painter, DrawerSettings drawerSettings)
         {
             Painter = painter;

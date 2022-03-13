@@ -15,6 +15,10 @@ namespace OOP_Lab2
         private Graphics painter;
         private int currFigInd;
         private readonly Drawers.DrawerSettings baseSettings = new Drawers.DrawerSettings(2, Color.SandyBrown, Color.LightYellow);
+        private bool buttonClicked = false;
+        private int clicksCount;
+        private int clicksAm;
+        private List<PointF> clicks;
 
         private List<Figure> figures = new List<Figure>()
         {
@@ -47,8 +51,6 @@ namespace OOP_Lab2
                 new Drawers.QuadrangalDrawer(painter, baseSettings),
                 new Drawers.EllipseDrawer(painter, baseSettings),
             };
-
-            
             currFigInd = figures.Count;
         }
 
@@ -60,32 +62,65 @@ namespace OOP_Lab2
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (currFigInd != figures.Count)
+        {            
+            if (buttonClicked)
             {
-                bool figureDrawn = false;
-                PointF ClickCords = new PointF(e.X, e.Y);
-                figures[currFigInd].Point1 = ClickCords;
-                foreach (Drawers.Drawer drawer in drawers)
+                clicks.Add(new PointF(e.X, e.Y));
+                clicksCount++;
+                if (clicksCount == clicksAm)
                 {
-                    if (drawer.Handles(figures[currFigInd]))
-                    {
-                        drawer.Draw(figures[currFigInd]);
-                        figureDrawn = true;
-                        currFigInd++;
-                        break;
-                    }
-                }
-                if (!figureDrawn)
-                {                  
-                    MessageBox.Show("Drawing of this figure is not implemented yet.");
+                    startPaint();
                 }
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void startPaint()
         {
+            buttonClicked = false;
+            switch (currFigInd)
+            {
+                case 3:
+                    float legSize;
+                    if (float.TryParse(legTextBox.Text, out legSize))
+                    {                        
+                        figures[currFigInd] = new RectTriangle(clicks[0], new Vector(clicks[1].X - clicks[0].X, clicks[0].Y - clicks[1].Y), legSize);
+                    }
+                    else
+                    {
+                        MessageBox.Show("High leg size value is invalid.");
+                    }
+                    break;
 
+                default:
+                    MessageBox.Show("Code error.");
+                    return;           
+            }
+            
+            bool figureDrawn = false;
+            foreach (Drawers.Drawer drawer in drawers)
+            {
+                if (drawer.Handles(figures[currFigInd]))
+                {
+                    drawer.Draw(figures[currFigInd]);
+                    figureDrawn = true;
+                    currFigInd++;
+                    break;
+                }
+            }
+            if (!figureDrawn)
+            {
+                MessageBox.Show("Drawing of this figure is not implemented yet.");
+            }           
+        }
+
+        private void rectTriangleButton_Click(object sender, EventArgs e)
+        {
+            currFigInd = 3;
+            clicksAm = 2;
+
+            buttonClicked = true;
+            clicksCount = 0;
+            clicks = new List<PointF>(clicksAm);
         }
     }
 }
