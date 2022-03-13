@@ -23,7 +23,21 @@ namespace OOP_Lab2
 
         public double GetDegree()
         {
-            return Math.Atan(Y / X);
+            if (X > 0)
+            {
+                return Math.Atan(Y / X);
+            }
+            else if (X < 0)
+            {
+                return Math.PI + Math.Atan(Y / X);
+            }
+            else
+            {
+                if (Y > 0)
+                    return Math.PI;
+                else
+                    return -Math.PI;
+            }
         }
 
         public float X;
