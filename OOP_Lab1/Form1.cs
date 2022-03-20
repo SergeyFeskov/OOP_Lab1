@@ -8,6 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+/*
+ * GENERAL CODE INFORMATION:
+ * all degrees are calculated from X asix counter-clockwise 
+ * protected constructors exist in code for constructors inheritance
+ * Point1 set code exists for recalculation of figure's cords (if point1 is changed) so, that figure's form stays same
+ */
+
 namespace OOP_Lab1
 {
     public partial class Form1 : Form
@@ -26,6 +34,8 @@ namespace OOP_Lab1
         {
             painter = pictureBox1.CreateGraphics();
             currFigNum = FigAm;
+
+            // static init of figures list
             figures = new List<Figure>()
             {
                 new Point(new PointF(0,0)),
@@ -48,6 +58,7 @@ namespace OOP_Lab1
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
+            // if not all figures are drawn, gets click cords and draws figure 
             if (currFigNum != FigAm)
             {
                 PointF ClickCords = new PointF(e.X, e.Y);
@@ -55,11 +66,6 @@ namespace OOP_Lab1
                 figures[currFigNum].Draw(painter);
                 currFigNum++;
             }
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -28,6 +28,7 @@ namespace OOP_Lab1
             Point3 = point3;
         }
 
+        // gets tringle cords with its point and vectors, which 'describe' adjacent to given point sides of triangle
         public Triangle(PointF startPoint, Vector side1, Vector side2) : base()
         {
             Point1 = startPoint;
@@ -50,7 +51,7 @@ namespace OOP_Lab1
 
         public override PointF Point1
         {
-            get => base.Point1;
+            get => base.Point1;             
             set
             {
                 Point2 = new PointF(value.X + (Point2.X - Point1.X), value.Y + (Point2.Y - Point1.Y));

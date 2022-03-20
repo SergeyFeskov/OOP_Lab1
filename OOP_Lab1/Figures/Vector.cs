@@ -10,6 +10,7 @@ namespace OOP_Lab1
             this.Y = Y;
         }
 
+        // gets vector cords by its lenth and degree
         public Vector(float Length, double Degree)
         {
             X = (float)(Length * Math.Cos(Degree));

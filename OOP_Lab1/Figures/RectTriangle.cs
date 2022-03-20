@@ -11,6 +11,7 @@ namespace OOP_Lab1
     {
         public RectTriangle(PointF startPoint, Vector side1, Vector side2) : base(startPoint, side1, side2)
         {
+            // degree of side2 is ignored (only its lenth is gotten for calculations)
             side2 = new Vector(side2.GetLength(), side1.GetDegree() - Math.PI / 2);
             Point3 = new PointF(Point1.X + side2.X, Point1.Y - side2.Y);
         }

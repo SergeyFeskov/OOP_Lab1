@@ -23,6 +23,7 @@ namespace OOP_Lab1
             Point4 = point4;
         }
 
+        // gets quadrangal cords with its point and vectors, which 'describe' quadrangal's polyline from given point 
         public Quadrangal(PointF startPoint, Vector vector1, Vector vector2, Vector vector3)
         {
             base.Point1 = startPoint;

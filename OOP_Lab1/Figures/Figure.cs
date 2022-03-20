@@ -11,6 +11,7 @@ namespace OOP_Lab1
     {
         public Figure()
         {
+            // setting basic graphic settings
             this.FillColor = Color.LimeGreen;
             this.BorderColor = Color.Black;
             this.BorderWidth = 2;
